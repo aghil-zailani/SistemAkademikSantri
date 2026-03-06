@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController\KbmController;
+use App\Http\Controllers\AdminController\PengasuhanController;
+use App\Http\Controllers\AdminController\HafalanController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -22,6 +24,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/kbm',[KbmController::class,'index'])->name('kbm.index');
     Route::post('/kbm/store',[KbmController::class,'store'])->name('kbm.store');
+    Route::get('/pengasuhan', [PengasuhanController::class, 'index'])->name('pengasuhan.index');
+    Route::get('/hafalan', [HafalanController::class, 'index'])->name('hafalan.index');
+    Route::get('/hafalan/{user_id}', [HafalanController::class, 'show'])->name('hafalan.show');
+    Route::post('/hafalan/setor', [HafalanController::class, 'storeSetoran'])->name('hafalan.storeSetoran');
+    Route::get('/hafalan/{user_id}/detail/{surah_id}', [HafalanController::class, 'detail'])->name('hafalan.detail');
     
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
