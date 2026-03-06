@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController\KbmController;
 use App\Http\Controllers\AdminController\PengasuhanController;
 use App\Http\Controllers\AdminController\HafalanController;
+use App\Http\Controllers\AdminController\PelanggaranController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hafalan/{user_id}', [HafalanController::class, 'show'])->name('hafalan.show');
     Route::post('/hafalan/setor', [HafalanController::class, 'storeSetoran'])->name('hafalan.storeSetoran');
     Route::get('/hafalan/{user_id}/detail/{surah_id}', [HafalanController::class, 'detail'])->name('hafalan.detail');
+    Route::resource('pelanggaran', PelanggaranController::class)->except(['create', 'show', 'edit']);
     
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
