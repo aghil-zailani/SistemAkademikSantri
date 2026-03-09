@@ -132,10 +132,10 @@
                                 <a href="{{ route('pelanggaran.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-triangle-exclamation mr-2"></i>Pelanggaran
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('kesehatan.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-notes-medical mr-2"></i>Kesehatan Siswa
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('ekstrakurikuler.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-futbol mr-2"></i>Ekstrakurikuler
                                 </a>
                             </div>

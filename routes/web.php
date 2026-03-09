@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminController\KbmController;
 use App\Http\Controllers\AdminController\PengasuhanController;
 use App\Http\Controllers\AdminController\HafalanController;
 use App\Http\Controllers\AdminController\PelanggaranController;
+use App\Http\Controllers\AdminController\KesehatanController;
+use App\Http\Controllers\AdminController\EkstrakurikulerController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -31,6 +33,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/hafalan/setor', [HafalanController::class, 'storeSetoran'])->name('hafalan.storeSetoran');
     Route::get('/hafalan/{user_id}/detail/{surah_id}', [HafalanController::class, 'detail'])->name('hafalan.detail');
     Route::resource('pelanggaran', PelanggaranController::class)->except(['create', 'show', 'edit']);
+    Route::resource('kesehatan', KesehatanController::class);
+    Route::get('kesehatan/{id}/keluar', [KesehatanController::class, 'editKeluar'])->name('kesehatan.keluar');
+    Route::put('kesehatan/{id}/keluar', [KesehatanController::class, 'updateKeluar'])->name('kesehatan.updateKeluar');
+
+    Route::resource('ekstrakurikuler', EkstrakurikulerController::class);
+    Route::get('ekstrakurikuler/{id}/kegiatan', [EkstrakurikulerController::class, 'kegiatan'])->name('ekstrakurikuler.kegiatan');
+    Route::post('ekstrakurikuler/{id}/tambah-mentor', [EkstrakurikulerController::class, 'tambahMentor'])->name('ekstrakurikuler.tambahMentor');
+    Route::post('ekstrakurikuler/{id}/tambah-siswa', [EkstrakurikulerController::class, 'tambahSiswa'])->name('ekstrakurikuler.tambahSiswa');
     
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
