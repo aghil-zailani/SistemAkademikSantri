@@ -10,6 +10,9 @@ use App\Http\Controllers\AdminController\HafalanController;
 use App\Http\Controllers\AdminController\PelanggaranController;
 use App\Http\Controllers\AdminController\KesehatanController;
 use App\Http\Controllers\AdminController\EkstrakurikulerController;
+use App\Http\Controllers\AdminController\SiswaController;
+use App\Http\Controllers\AdminController\OrangTuaController;
+use App\Http\Controllers\AdminController\HrdController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -41,6 +44,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('ekstrakurikuler/{id}/kegiatan', [EkstrakurikulerController::class, 'kegiatan'])->name('ekstrakurikuler.kegiatan');
     Route::post('ekstrakurikuler/{id}/tambah-mentor', [EkstrakurikulerController::class, 'tambahMentor'])->name('ekstrakurikuler.tambahMentor');
     Route::post('ekstrakurikuler/{id}/tambah-siswa', [EkstrakurikulerController::class, 'tambahSiswa'])->name('ekstrakurikuler.tambahSiswa');
+
+    Route::resource('siswa', SiswaController::class);
+
+    //Orang tua
+    Route::resource('orangtua', OrangTuaController::class);
+    Route::get('orangtua/{id}/siswa', [OrangTuaController::class, 'manageSiswa'])->name('orangtua.siswa');
+    Route::post('orangtua/{id}/siswa', [OrangTuaController::class, 'storeSiswa'])->name('orangtua.storeSiswa');
+    Route::delete('orangtua/{id}/siswa/{student_id}', [OrangTuaController::class, 'destroySiswa'])->name('orangtua.destroySiswa');
+    Route::post('orangtua/{id}/reset-password', [OrangTuaController::class, 'resetPassword'])->name('orangtua.resetPassword');
+
+    //HRD
+    Route::resource('hrd', HrdController::class);
+    Route::get('hrd/{id}/subject', [HrdController::class, 'subjects'])->name('hrd.subject');
+    Route::post('hrd/{id}/subject', [HrdController::class, 'storeSubject'])->name('hrd.storeSubject');
+    Route::delete('hrd/{id}/subject/{subject_id}', [HrdController::class, 'destroySubject'])->name('hrd.destroySubject');
+    Route::get('hrd-fingerprint', [HrdController::class, 'fingerprint'])->name('hrd.fingerprint');
+    Route::post('hrd-fingerprint', [HrdController::class, 'updateFingerprint'])->name('hrd.updateFingerprint');
     
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');

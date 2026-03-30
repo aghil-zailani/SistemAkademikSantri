@@ -23,6 +23,9 @@ class User extends Authenticatable
         'phone',
         'avatar',
         'status',
+        'no_handphone',
+        'mesin_fingerprint', 
+        'fingerprint_id'
     ];
 
     /**
@@ -202,5 +205,9 @@ class User extends Authenticatable
     public function scopeRole($query, $role)
     {
         return $query->where('role', $role);
+    }
+
+    public function mataPelajarans() {
+        return $this->belongsToMany(MataPelajaran::class, 'guru_mata_pelajaran', 'user_id', 'mata_pelajaran_id');
     }
 }

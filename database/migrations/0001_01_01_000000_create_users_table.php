@@ -21,6 +21,11 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('avatar')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
+            if (!Schema::hasColumn('users', 'no_handphone')) {
+                $table->string('no_handphone')->nullable();
+            }
+            $table->string('mesin_fingerprint')->nullable();
+            $table->string('fingerprint_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

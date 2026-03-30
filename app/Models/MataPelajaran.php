@@ -10,4 +10,8 @@ class MataPelajaran extends Model
         'nama_mata_pelajaran',
         'kode_mapel'
     ];
+
+    public function gurus() {
+        return $this->belongsToMany(User::class, 'guru_mata_pelajaran', 'mata_pelajaran_id', 'user_id');
+    }
 }
