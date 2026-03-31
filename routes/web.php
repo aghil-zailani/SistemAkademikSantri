@@ -13,6 +13,9 @@ use App\Http\Controllers\AdminController\EkstrakurikulerController;
 use App\Http\Controllers\AdminController\SiswaController;
 use App\Http\Controllers\AdminController\OrangTuaController;
 use App\Http\Controllers\AdminController\HrdController;
+use App\Http\Controllers\AdminController\RombonganBelajarController;
+use App\Http\Controllers\AdminController\MataPelajaranController;
+use App\Http\Controllers\AdminController\ItemPelanggaranController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -61,6 +64,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('hrd/{id}/subject/{subject_id}', [HrdController::class, 'destroySubject'])->name('hrd.destroySubject');
     Route::get('hrd-fingerprint', [HrdController::class, 'fingerprint'])->name('hrd.fingerprint');
     Route::post('hrd-fingerprint', [HrdController::class, 'updateFingerprint'])->name('hrd.updateFingerprint');
+
+    Route::resource('rombongan-belajar', RombonganBelajarController::class)->except(['create','show','edit']);
+    Route::resource('mata-pelajaran', MataPelajaranController::class)->except(['create','show','edit']);
+    Route::resource('item-pelanggaran', ItemPelanggaranController::class)->except(['create','show','edit']);
     
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class JenisPelanggaran extends Model
 {
+    protected $guarded = [];
     protected $fillable = ['nama_pelanggaran', 'poin'];
 
     public function pelanggaranSiswas()
