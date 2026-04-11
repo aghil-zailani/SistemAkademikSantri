@@ -10,6 +10,20 @@
         </a>
     </div>
 
+    @if ($errors->any())
+        <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6">
+            <div class="flex items-center mb-2">
+                <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                <h3 class="text-sm font-bold text-red-800">Gagal menyimpan data!</h3>
+            </div>
+            <ul class="list-disc list-inside text-sm text-red-700">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form action="{{ route('siswa.store') }}" method="POST" class="p-6">
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
