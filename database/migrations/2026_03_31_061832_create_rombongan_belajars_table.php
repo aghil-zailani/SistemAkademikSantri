@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('rombongan_belajars', function (Blueprint $table) {
             $table->id();
             $table->string('nama'); // contoh: VII-A
-            $table->string('jenjang'); // contoh: 7
+            $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onDelete('set null');
             $table->foreignId('wali_kelas_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminController\HrdController;
 use App\Http\Controllers\AdminController\RombonganBelajarController;
 use App\Http\Controllers\AdminController\MataPelajaranController;
 use App\Http\Controllers\AdminController\ItemPelanggaranController;
+use App\Http\Controllers\AdminController\KelasController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -49,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('ekstrakurikuler/{id}/tambah-siswa', [EkstrakurikulerController::class, 'tambahSiswa'])->name('ekstrakurikuler.tambahSiswa');
 
     Route::resource('siswa', SiswaController::class);
+
+    //Kelas
+    Route::resource('kelas', KelasController::class)->except(['create','show','edit']);
 
     //Orang tua
     Route::resource('orangtua', OrangTuaController::class);

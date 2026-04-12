@@ -167,11 +167,12 @@
                                     </div>
 
                                     <div class="absolute left-full top-0 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                                        <a href="{{ route('kelas.index') }}" class="block px-4 py-2 text-sm hover:bg-blue-50">Kelas</a>
                                         <a href="{{ route('rombongan-belajar.index') }}" class="block px-4 py-2 text-sm hover:bg-blue-50">Rombongan Belajar</a>
                                         <a href="{{ route('mata-pelajaran.index') }}" class="block px-4 py-2 text-sm hover:bg-blue-50">Mata Pelajaran</a>
                                         <a href="{{ route('item-pelanggaran.index') }}" class="block px-4 py-2 text-sm hover:bg-blue-50">Item Pelanggaran</a>
-                                        <a href="#" class="block px-4 py-2 text-sm hover:bg-blue-50">Konfirmasi Kartu</a>
-                                        <a href="#" class="block px-4 py-2 text-sm hover:bg-blue-50">Nama Photo</a>
+                                        <!-- <a href="#" class="block px-4 py-2 text-sm hover:bg-blue-50">Konfirmasi Kartu</a>
+                                        <a href="#" class="block px-4 py-2 text-sm hover:bg-blue-50">Nama Photo</a> -->
                                     </div>
                                 </div>
                             </div>

@@ -261,7 +261,16 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">
                             <i class="fas fa-clock text-gray-500 mr-1"></i>Jam Pembelajaran <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="jam_pembelajaran" required placeholder="Contoh: 08:00 - 10:00" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="jam_mulai" class="block text-sm font-medium text-gray-700 mb-1">Jam Mulai</label>
+                                <input type="time" name="jam_mulai" id="jam_mulai" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            </div>
+                            <div>
+                                <label for="jam_selesai" class="block text-sm font-medium text-gray-700 mb-1">Jam Selesai</label>
+                                <input type="time" name="jam_selesai" id="jam_selesai" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div>

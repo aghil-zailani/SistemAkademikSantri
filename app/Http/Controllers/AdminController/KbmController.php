@@ -23,17 +23,23 @@ class KbmController extends Controller
     {
         $request->validate([
             'tanggal' => 'required',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
             'kelas_id' => 'required',
             'mata_pelajaran_id' => 'required',
             'materi' => 'required'
         ]);
+
+        $jamPembelajaran = $request->jam_mulai . ' - ' . $request->jam_selesai;
+
+        $metode = $request->input('metode_pembelajaran', []);
 
         Kbms::create([
             'tanggal' => $request->tanggal,
             'guru_id' => auth()->id(),
             'kelas_id' => $request->kelas_id,
             'mata_pelajaran_id' => $request->mata_pelajaran_id,
-            'jam_pembelajaran' => $request->jam_pembelajaran,
+            'jam_pembelajaran' => $jamPembelajaran,
             'materi' => $request->materi,
             'sub_materi' => $request->sub_materi,
             'status' => $request->status,
