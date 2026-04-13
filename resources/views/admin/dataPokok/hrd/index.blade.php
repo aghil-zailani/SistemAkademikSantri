@@ -43,10 +43,10 @@
                 <td class="px-6 py-4">
                     <div class="font-medium text-gray-800">{{ $item->name }}</div>
                     <div class="text-[11px] text-gray-500 mt-0.5">
-                        {{ $item->mataPelajarans->pluck('nama_pelajaran')->implode(', ') ?: '-' }}
+                        {{ $item->mataPelajarans->pluck('nama_mata_pelajaran')->implode(', ') ?: '-' }}
                     </div>
                 </td>
-                <td class="px-6 py-4">{{ $item->no_handphone ?? '-' }}</td>
+                <td class="px-6 py-4">{{ $item->phone ?? '-' }}</td>
                 <td class="px-6 py-4">{{ $item->email }}</td>
                 <td class="px-6 py-4 capitalize">{{ $item->role == 'teacher' ? 'Guru' : $item->role }}</td>
             </tr>

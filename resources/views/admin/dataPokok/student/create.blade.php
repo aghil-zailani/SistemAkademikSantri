@@ -52,10 +52,10 @@
             </div>
         </div>
 
-        <div class="w-full md:w-1/2 mb-6">
+        <!-- <div class="w-full md:w-1/2 mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-1">ID Kartu</label>
             <input type="text" name="id_kartu" placeholder="........" class="w-full border-gray-300 rounded border p-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-gray-50">
-        </div>
+        </div> -->
 
         <hr class="mb-6 border-gray-200">
 

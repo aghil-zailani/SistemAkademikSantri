@@ -17,11 +17,12 @@ class SiswaController extends Controller
         
         // Data untuk Summary Cards
         $total = $students->count();
-        $punyaKartu = $students->whereNotNull('id_kartu')->count();
-        $tanpaKartu = $students->whereNull('id_kartu')->count();
+        // $punyaKartu = $students->whereNotNull('id_kartu')->count();
+        // $tanpaKartu = $students->whereNull('id_kartu')->count();
+        
         $punyaUser = $students->whereNotNull('user_id')->count();
 
-        return view('admin.dataPokok.student.index', compact('students', 'total', 'punyaKartu', 'tanpaKartu', 'punyaUser'));
+        return view('admin.dataPokok.student.index', compact('students', 'total', 'punyaUser'));
     }
 
     public function create()
@@ -57,7 +58,7 @@ class SiswaController extends Controller
             'nis' => $request->nis,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'id_kartu' => $request->id_kartu,
+            // 'id_kartu' => $request->id_kartu,
             'va_number' => '250' . rand(100, 999), // Contoh generate VA auto
         ]);
 
@@ -99,7 +100,7 @@ class SiswaController extends Controller
             'nis' => $request->nis,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
-            'id_kartu' => $request->id_kartu,
+            // 'id_kartu' => $request->id_kartu,
         ]);
 
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diupdate.');
