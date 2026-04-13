@@ -14,7 +14,7 @@
     </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
     <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4">
         <div class="w-12 h-12 rounded bg-blue-100 flex items-center justify-center text-[#0056b3] text-xl"><i class="fas fa-users"></i></div>
         <div>
@@ -22,20 +22,20 @@
             <div class="text-xs text-gray-500">Siswa terdaftar</div>
         </div>
     </div>
-    <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4">
+    <!-- <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4">
         <div class="w-12 h-12 rounded bg-green-100 flex items-center justify-center text-green-600 text-xl"><i class="fas fa-id-card"></i></div>
         <div>
-            <div class="font-bold text-gray-800">{{ $punyaKartu }} Punya Kartu</div>
+            
             <div class="text-xs text-gray-500">Sudah memiliki ID kartu</div>
         </div>
     </div>
     <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4">
         <div class="w-12 h-12 rounded bg-yellow-100 flex items-center justify-center text-yellow-600 text-xl"><i class="fas fa-id-card-clip"></i></div>
         <div>
-            <div class="font-bold text-gray-800">{{ $tanpaKartu }} Tanpa Kartu</div>
+            
             <div class="text-xs text-gray-500">Belum memiliki ID kartu</div>
         </div>
-    </div>
+    </div> -->
     <div class="bg-white border border-gray-200 rounded-lg p-4 flex items-center gap-4">
         <div class="w-12 h-12 rounded bg-blue-50 flex items-center justify-center text-blue-500 text-xl"><i class="fas fa-user-check"></i></div>
         <div>
@@ -53,7 +53,7 @@
                 <th class="px-6 py-4 w-1/4">Siswa</th>
                 <th class="px-6 py-4">NISN / NIS</th>
                 <th class="px-6 py-4">Tempat, Tanggal Lahir</th>
-                <th class="px-6 py-4 text-center">ID Kartu</th>
+                <!-- <th class="px-6 py-4 text-center">ID Kartu</th> -->
                 <th class="px-6 py-4 text-center">User Login</th>
                 <th class="px-6 py-4 text-center">Aksi</th>
             </tr>
@@ -74,13 +74,13 @@
                     <div class="font-medium text-gray-800">{{ $item->tempat_lahir ?? '-' }}</div>
                     <div class="text-xs text-gray-500">{{ $item->tanggal_lahir ? \Carbon\Carbon::parse($item->tanggal_lahir)->format('d/m/Y') : '-' }}</div>
                 </td>
-                <td class="px-6 py-4 text-center">
+                <!-- <td class="px-6 py-4 text-center">
                     @if($item->id_kartu)
                         <span class="bg-[#28a745] text-white px-2 py-0.5 rounded text-xs font-semibold">Ada</span>
                     @else
                         <span class="bg-gray-400 text-white px-2 py-0.5 rounded text-xs font-semibold">Tidak Ada</span>
                     @endif
-                </td>
+                </td> -->
                 <td class="px-6 py-4 text-center">
                     @if($item->user_id)
                         <span class="bg-[#0056b3] text-white px-2 py-0.5 rounded text-xs font-semibold">Ada</span>
