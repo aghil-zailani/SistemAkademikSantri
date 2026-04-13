@@ -73,6 +73,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('mata-pelajaran', MataPelajaranController::class)->except(['create','show','edit']);
     Route::resource('item-pelanggaran', ItemPelanggaranController::class)->except(['create','show','edit']);
     
+    // Keuangan (Merchant)
+    Route::resource('merchant', App\Http\Controllers\AdminController\MerchantController::class);
+    Route::resource('uang-siswa', App\Http\Controllers\AdminController\StudentBalanceController::class);
+
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
     
