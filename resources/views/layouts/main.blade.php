@@ -185,13 +185,13 @@
                                 <i class="fas fa-chevron-down ml-2 text-xs"></i>
                             </button>
                             <div class="dropdown-menu absolute left-0 top-full w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('merchant.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-store mr-2"></i>Uang Masuk (Merchant)
                                 </a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-building-columns mr-2"></i>Uang Masuk (VA)
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('uang-siswa.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-wallet mr-2"></i>Uang Siswa
                                 </a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
