@@ -76,6 +76,14 @@ Route::middleware(['auth'])->group(function () {
     // Keuangan (Merchant)
     Route::resource('merchant', App\Http\Controllers\AdminController\MerchantController::class);
     Route::resource('uang-siswa', App\Http\Controllers\AdminController\StudentBalanceController::class);
+    Route::resource('tagihan', App\Http\Controllers\AdminController\TagihanController::class);
+    Route::post('tagihan/{id}/add-student', [App\Http\Controllers\AdminController\TagihanController::class, 'addStudent'])->name('tagihan.addStudent');
+    Route::get('buku-besar', [App\Http\Controllers\AdminController\BukuBesarController::class, 'index'])->name('buku-besar.index');
+    Route::get('buku-besar/{akun}', [App\Http\Controllers\AdminController\BukuBesarController::class, 'show'])->name('buku-besar.show');
+    Route::get('jurnal', [App\Http\Controllers\AdminController\JurnalController::class, 'index'])->name('jurnal.index');
+    Route::get('jurnal/create', [App\Http\Controllers\AdminController\JurnalController::class, 'create'])->name('jurnal.create');
+    Route::post('jurnal', [App\Http\Controllers\AdminController\JurnalController::class, 'store'])->name('jurnal.store');
+    Route::delete('jurnal/{id}', [App\Http\Controllers\AdminController\JurnalController::class, 'destroy'])->name('jurnal.destroy');
 
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');

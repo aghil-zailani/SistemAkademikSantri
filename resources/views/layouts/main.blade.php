@@ -194,13 +194,13 @@
                                 <a href="{{ route('uang-siswa.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-wallet mr-2"></i>Uang Siswa
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('tagihan.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-file-invoice-dollar mr-2"></i>Tagihan
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('buku-besar.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-book mr-2"></i>Buku Besar
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('jurnal.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-pen-to-square mr-2"></i>Jurnal
                                 </a>
                             </div>

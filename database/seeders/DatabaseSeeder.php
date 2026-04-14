@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             // ... other seeders can be added here
             MerchantTransactionSeeder::class,
             StudentBalanceSeeder::class,
+            BukuBesarSeeder::class,
+            JurnalSeeder::class,
         ]);
     }
 }
