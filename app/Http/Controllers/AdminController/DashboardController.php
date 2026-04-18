@@ -8,19 +8,13 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display the dashboard.
-     */
     public function index()
     {
-        // Example: Get statistics from database
         $statistics = [
             'total_ptk' => $this->getTotalPTK(),
             'total_siswa' => $this->getTotalSiswa(),
             'total_rombel' => $this->getTotalRombel(),
         ];
-
-        // Example: Get chart data
         $chartData = [
             'presensi_masuk' => $this->getPresensiMasukData(),
             'aktifitas_pengasuhan' => $this->getAktifitasPengasuhanData(),
@@ -31,39 +25,23 @@ class DashboardController extends Controller
         return view('admin.index', compact('statistics', 'chartData'));
     }
 
-    /**
-     * Get total PTK (Pendidik dan Tenaga Kependidikan)
-     */
     private function getTotalPTK()
     {
-        // Replace with your actual query
         // return DB::table('ptk')->count();
         return 31;
     }
 
-    /**
-     * Get total students
-     */
     private function getTotalSiswa()
     {
-        // Replace with your actual query
-        // return DB::table('siswa')->count();
-        return 34;
+        return DB::table('students')->count();
     }
 
-    /**
-     * Get total rombel (Rombongan Belajar)
-     */
+
     private function getTotalRombel()
     {
-        // Replace with your actual query
-        // return DB::table('rombel')->count();
-        return 2;
+        return DB::table('rombongan_belajars')->count();
     }
 
-    /**
-     * Get presensi masuk data for chart
-     */
     private function getPresensiMasukData()
     {
         // Replace with your actual query
@@ -86,12 +64,8 @@ class DashboardController extends Controller
         ];
     }
 
-    /**
-     * Get aktifitas pengasuhan data for chart
-     */
     private function getAktifitasPengasuhanData()
     {
-        // Replace with your actual query
         return [
             ['tanggal' => '2025-01-17', 'jumlah' => 0],
             ['tanggal' => '2025-01-15', 'jumlah' => 80],
@@ -103,12 +77,8 @@ class DashboardController extends Controller
         ];
     }
 
-    /**
-     * Get presensi pengasuhan data for chart
-     */
     private function getPresensiPengasuhanData()
     {
-        // Replace with your actual query
         return [
             ['tanggal' => '2025-01-17', 'jumlah' => 2],
             ['tanggal' => '2025-01-16', 'jumlah' => 25],
@@ -120,12 +90,8 @@ class DashboardController extends Controller
         ];
     }
 
-    /**
-     * Get aktifitas klinik data for chart
-     */
     private function getAktifitasKlinikData()
     {
-        // Replace with your actual query
         return [
             ['tanggal' => '2025-01-17', 'jumlah' => 0],
             ['tanggal' => '2025-01-16', 'jumlah' => 0],
@@ -137,9 +103,6 @@ class DashboardController extends Controller
         ];
     }
 
-    /**
-     * API endpoint to get fresh chart data (for AJAX updates)
-     */
     public function getChartData(Request $request)
     {
         $type = $request->input('type');

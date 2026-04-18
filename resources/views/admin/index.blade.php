@@ -32,17 +32,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Jumlah PTK</p>
-                <h3 class="text-4xl font-bold text-gray-800">31</h3>
+                <h3 class="text-4xl font-bold text-gray-800">{{ $statistics['total_ptk'] }}</h3>
             </div>
             <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-chalkboard-teacher text-3xl text-blue-600"></i>
             </div>
-        </div>
-        <div class="mt-4 flex items-center text-sm">
-            <span class="text-green-600 font-semibold flex items-center">
-                <i class="fas fa-arrow-up mr-1"></i> 5.2%
-            </span>
-            <span class="text-gray-500 ml-2">dari bulan lalu</span>
         </div>
     </div>
 
@@ -51,17 +45,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Jumlah Siswa</p>
-                <h3 class="text-4xl font-bold text-gray-800">34</h3>
+                <h3 class="text-4xl font-bold text-gray-800">{{ $statistics['total_siswa'] }}</h3>
             </div>
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-users text-3xl text-green-600"></i>
             </div>
-        </div>
-        <div class="mt-4 flex items-center text-sm">
-            <span class="text-green-600 font-semibold flex items-center">
-                <i class="fas fa-arrow-up mr-1"></i> 3.1%
-            </span>
-            <span class="text-gray-500 ml-2">dari bulan lalu</span>
         </div>
     </div>
 
@@ -70,17 +58,11 @@
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Jumlah Rombel</p>
-                <h3 class="text-4xl font-bold text-gray-800">2</h3>
+                <h3 class="text-4xl font-bold text-gray-800">{{ $statistics['total_rombel'] }}</h3>
             </div>
             <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center">
                 <i class="fas fa-layer-group text-3xl text-purple-600"></i>
             </div>
-        </div>
-        <div class="mt-4 flex items-center text-sm">
-            <span class="text-gray-500 font-semibold flex items-center">
-                <i class="fas fa-minus mr-1"></i> 0%
-            </span>
-            <span class="text-gray-500 ml-2">tidak ada perubahan</span>
         </div>
     </div>
 </div>
@@ -149,6 +131,13 @@
 <script>
 $(document).ready(function() {
     
+    const rawChartData = @json($chartData);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('id-ID', { day: '2-digit', month: 'short' });
+    };
+
     // Chart Configuration
     const chartConfig = {
         responsive: true,
@@ -206,10 +195,10 @@ $(document).ready(function() {
     new Chart(ctx1, {
         type: 'line',
         data: {
-            labels: ['17 Jan', '16 Jan', '15 Jan', '14 Jan', '13 Jan', '12 Jan', '11 Jan'],
+            labels: rawChartData.presensi_masuk.map(item => formatDate(item.tanggal)),
             datasets: [{
                 label: 'Jumlah',
-                data: [8, 30, 31, 31, 31, 30, 15],
+                data: rawChartData.presensi_masuk.map(item => item.jumlah),
                 borderColor: '#3b82f6',
                 backgroundColor: gradient1,
                 borderWidth: 3,
@@ -234,10 +223,10 @@ $(document).ready(function() {
     new Chart(ctx2, {
         type: 'line',
         data: {
-            labels: ['17 Jan', '15 Jan', '08 Jan', '06 Jan', '19 Dec', '18 Dec', '14 Dec'],
+            labels: rawChartData.aktifitas_pengasuhan.map(item => formatDate(item.tanggal)),
             datasets: [{
                 label: 'Jumlah Aktifitas',
-                data: [0, 80, 80, 0, 0, 0, 110],
+                data: rawChartData.aktifitas_pengasuhan.map(item => item.jumlah),
                 borderColor: '#3b82f6',
                 backgroundColor: gradient2,
                 borderWidth: 3,
@@ -262,10 +251,10 @@ $(document).ready(function() {
     new Chart(ctx3, {
         type: 'line',
         data: {
-            labels: ['17 Jan', '16 Jan', '15 Jan', '14 Jan', '13 Jan', '12 Jan', '11 Jan'],
+            labels: rawChartData.presensi_pengasuhan.map(item => formatDate(item.tanggal)),
             datasets: [{
                 label: 'Jumlah',
-                data: [2, 25, 29, 29, 28, 29, 29],
+                data: rawChartData.presensi_pengasuhan.map(item => item.jumlah),
                 borderColor: '#22c55e',
                 backgroundColor: gradient3,
                 borderWidth: 3,
@@ -287,10 +276,10 @@ $(document).ready(function() {
     new Chart(ctx4, {
         type: 'bar',
         data: {
-            labels: ['17 Jan', '16 Jan', '15 Jan', '14 Jan', '13 Jan', '12 Jan', '11 Jan'],
+            labels: rawChartData.aktifitas_klinik.map(item => formatDate(item.tanggal)),
             datasets: [{
                 label: 'Jumlah',
-                data: [0, 0, 0, 0, 0, 0, 0],
+                data: rawChartData.aktifitas_klinik.map(item => item.jumlah),
                 backgroundColor: '#ef4444',
                 borderRadius: 6,
                 barThickness: 40
