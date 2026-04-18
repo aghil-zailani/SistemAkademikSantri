@@ -126,7 +126,7 @@
                                 <a href="{{ route('hafalan.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-book-quran mr-2"></i>Hafalan Siswa
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                                <a href="{{ route('penilaian.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                                     <i class="fas fa-clipboard-check mr-2"></i>Penilaian
                                 </a>
                                 <a href="{{ route('pelanggaran.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
