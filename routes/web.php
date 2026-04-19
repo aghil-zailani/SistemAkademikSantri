@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController\MataPelajaranController;
 use App\Http\Controllers\AdminController\ItemPelanggaranController;
 use App\Http\Controllers\AdminController\KelasController;
 use App\Http\Controllers\AdminController\PenilaianController;
+use App\Http\Controllers\AdminController\PresensiController;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
@@ -77,6 +78,11 @@ Route::middleware(['auth'])->group(function () {
     // Penilaian
     Route::resource('penilaian', PenilaianController::class);
     Route::get('/get-students-by-rombel/{rombel_id}', [PenilaianController::class, 'getStudentsByRombel'])->name('get.students');
+
+    // Presensi
+    Route::get('/presensi', [PresensiController::class, 'index'])->name('admin.presensi.index');
+    Route::resource('presensi', PresensiController::class);
+    Route::get('/get-students-presensi', [PresensiController::class, 'getStudentsForPresensi'])->name('get.students.presensi');
 
     // Keuangan (Merchant)
     Route::resource('merchant', App\Http\Controllers\AdminController\MerchantController::class);
