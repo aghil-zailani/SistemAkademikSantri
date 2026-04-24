@@ -41,9 +41,9 @@ class PresensiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal' => 'required|date',
-            'rombongan_belajar_id' => 'required',
-            'status' => 'required|array',
+            'tanggal'              => 'required|date',
+            'rombongan_belajar_id' => 'required|exists:rombongan_belajars,id',
+            'status'               => 'required|array',
         ]);
 
         DB::beginTransaction();
@@ -53,22 +53,22 @@ class PresensiController extends Controller
                 
                 Presensi::updateOrCreate(
                     [
-                        'student_id' => $student_id,
-                        'tanggal' => $request->tanggal,
-                        'mata_pelajaran_id' => $request->mata_pelajaran_id,
+                        'student_id'       => $student_id,
+                        'tanggal'          => $request->tanggal,
+                        'mata_pelajaran_id' => $request->mata_pelajaran_id ?: null,
                     ],
                     [
                         'rombongan_belajar_id' => $request->rombongan_belajar_id,
-                        'status' => $status,
-                        'keterangan' => $keterangan
+                        'status'               => $status,
+                        'keterangan'           => $keterangan,
                     ]
                 );
             }
 
             DB::commit();
             return redirect()->route('admin.presensi.index', [
-                'tanggal' => $request->tanggal,
-                'rombongan_belajar_id' => $request->rombongan_belajar_id
+                'tanggal'              => $request->tanggal,
+                'rombongan_belajar_id' => $request->rombongan_belajar_id,
             ])->with('success', 'Data presensi berhasil disimpan.');
 
         } catch (\Exception $e) {
@@ -77,32 +77,40 @@ class PresensiController extends Controller
         }
     }
 
+    /**
+     * AJAX: Ambil daftar siswa berdasarkan rombel, tanggal, dan mata pelajaran.
+     * FIX: query sekarang menggunakan kolom rombongan_belajar_id di tabel students.
+     */
     public function getStudentsForPresensi(Request $request)
     {
         $rombel_id = $request->rombel_id;
-        $tanggal = $request->tanggal;
-        $mapel_id = $request->mapel_id;
+        $tanggal   = $request->tanggal;
+        $mapel_id  = $request->mapel_id;
 
-        $students = Student::where('rombongan_belajar_id', $rombel_id)->orderBy('name', 'asc')->get();
+        // FIX #1: query berdasarkan rombongan_belajar_id di tabel students
+        $students = Student::where('rombongan_belajar_id', $rombel_id)
+                           ->orderBy('nama_lengkap', 'asc')
+                           ->get();
 
         $existingPresensi = Presensi::where('rombongan_belajar_id', $rombel_id)
             ->where('tanggal', $tanggal)
-            ->where('mata_pelajaran_id', $mapel_id)
+            ->where('mata_pelajaran_id', $mapel_id ?: null)
             ->pluck('status', 'student_id')
             ->toArray();
 
         $existingKeterangan = Presensi::where('rombongan_belajar_id', $rombel_id)
             ->where('tanggal', $tanggal)
-            ->where('mata_pelajaran_id', $mapel_id)
+            ->where('mata_pelajaran_id', $mapel_id ?: null)
             ->pluck('keterangan', 'student_id')
             ->toArray();
 
-        $data = $students->map(function($student) use ($existingPresensi, $existingKeterangan) {
+        $data = $students->map(function ($student) use ($existingPresensi, $existingKeterangan) {
             return [
-                'id' => $student->id,
-                'name' => $student->name,
-                'status' => $existingPresensi[$student->id] ?? 'Hadir',
-                'keterangan' => $existingKeterangan[$student->id] ?? ''
+                'id'         => $student->id,
+                // FIX #2: Student punya kolom nama_lengkap, bukan name
+                'name'       => $student->nama_lengkap,
+                'status'     => $existingPresensi[$student->id] ?? 'Hadir',
+                'keterangan' => $existingKeterangan[$student->id] ?? '',
             ];
         });
 

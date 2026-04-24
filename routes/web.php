@@ -50,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('ekstrakurikuler/{id}/kegiatan', [EkstrakurikulerController::class, 'kegiatan'])->name('ekstrakurikuler.kegiatan');
     Route::post('ekstrakurikuler/{id}/tambah-mentor', [EkstrakurikulerController::class, 'tambahMentor'])->name('ekstrakurikuler.tambahMentor');
     Route::post('ekstrakurikuler/{id}/tambah-siswa', [EkstrakurikulerController::class, 'tambahSiswa'])->name('ekstrakurikuler.tambahSiswa');
+    Route::delete('ekstrakurikuler/{ekskul_id}/mentor/{mentor_id}', [EkstrakurikulerController::class, 'hapusMentor'])->name('ekstrakurikuler.hapusMentor');
+    Route::delete('ekstrakurikuler/{ekskul_id}/siswa/{siswa_id}', [EkstrakurikulerController::class, 'hapusSiswa'])->name('ekstrakurikuler.hapusSiswa');
+    Route::post('ekstrakurikuler/{id}/tambah-kegiatan', [EkstrakurikulerController::class, 'tambahKegiatan'])->name('ekstrakurikuler.tambahKegiatan');
 
     Route::resource('siswa', SiswaController::class);
 
@@ -87,6 +90,8 @@ Route::middleware(['auth'])->group(function () {
     // Keuangan (Merchant)
     Route::resource('merchant', App\Http\Controllers\AdminController\MerchantController::class);
     Route::resource('uang-siswa', App\Http\Controllers\AdminController\StudentBalanceController::class);
+
+    Route::resource('tagihan', \App\Http\Controllers\AdminController\Keuangan\TagihanController::class);
 
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
