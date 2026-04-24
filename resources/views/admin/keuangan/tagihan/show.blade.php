@@ -40,7 +40,7 @@
                 @forelse($tagihan->tagihanSiswas as $index => $detail)
                 <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
                     <td class="py-3 px-4 text-sm text-gray-600">{{ $index + 1 }}</td>
-                    <td class="py-3 px-4 text-sm font-medium text-gray-800 uppercase">{{ $detail->student->name ?? 'Unknown Student' }}</td>
+                    <td class="py-3 px-4 text-sm font-medium text-gray-800 uppercase">{{ $detail->student->nama_lengkap ?? 'Unknown Student' }}</td>
                     <td class="py-3 px-4 text-sm text-gray-800 text-right">{{ number_format($detail->jumlah, 0, ',', '.') }}</td>
                     <td class="py-3 px-4 text-sm text-center">
                         @if($detail->status == 'success')

@@ -91,7 +91,14 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('merchant', App\Http\Controllers\AdminController\MerchantController::class);
     Route::resource('uang-siswa', App\Http\Controllers\AdminController\StudentBalanceController::class);
 
-    Route::resource('tagihan', \App\Http\Controllers\AdminController\Keuangan\TagihanController::class);
+    // Keuangan — Tagihan & Akun (route names: admin.tagihan.*, admin.akun.*)
+    Route::name('admin.')->group(function () {
+        Route::resource('tagihan', \App\Http\Controllers\AdminController\Keuangan\TagihanController::class);
+        Route::resource('akun', \App\Http\Controllers\AdminController\Keuangan\AkunController::class)
+             ->except(['create', 'show', 'edit']);
+        Route::post('akun/{akun}/toggle', [\App\Http\Controllers\AdminController\Keuangan\AkunController::class, 'toggleAktif'])
+             ->name('akun.toggle');
+    });
 
     // API endpoint for chart data updates
     Route::get('/api/chart-data', [DashboardController::class, 'getChartData'])->name('api.chart-data');
