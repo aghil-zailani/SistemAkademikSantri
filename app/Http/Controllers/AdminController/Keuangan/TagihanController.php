@@ -15,10 +15,9 @@ class TagihanController extends Controller
             
         foreach ($tagihans as $tagihan) {
             $tagihan->sudah_bayar_nominal = $tagihan->tagihanSiswas->where('status', 'success')->sum('jumlah');
-            $tagihan->sudah_bayar_count = $tagihan->tagihanSiswas->where('status', 'success')->count();
-            
+            $tagihan->sudah_bayar_count   = $tagihan->tagihanSiswas->where('status', 'success')->count();
             $tagihan->belum_bayar_nominal = $tagihan->tagihanSiswas->where('status', 'pending')->sum('jumlah');
-            $tagihan->belum_bayar_count = $tagihan->tagihanSiswas->where('status', 'pending')->count();
+            $tagihan->belum_bayar_count   = $tagihan->tagihanSiswas->where('status', 'pending')->count();
         }
 
         return view('admin.keuangan.tagihan.index', compact('tagihans'));
@@ -27,46 +26,42 @@ class TagihanController extends Controller
     public function show($id)
     {        
         $tagihan = Tagihan::with(['tagihanSiswas.student'])->findOrFail($id);
-        
         return view('admin.keuangan.tagihan.show', compact('tagihan'));
     }
 
     public function create()
     {        
-        $akuns = Akun::orderBy('kode', 'asc')->get(); 
-        
+        $akuns = Akun::aktif()->orderBy('kode')->get(); 
         return view('admin.keuangan.tagihan.create', compact('akuns'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'akun_id' => 'required|exists:akuns,id',
+            'nama'                => 'required|string|max:255',
+            'akun_id'             => 'required|exists:akuns,id',
             'tanggal_jatuh_tempo' => 'required|date',
         ]);
 
-        Tagihan::create($request->all());
-
+        Tagihan::create($request->only('nama', 'akun_id', 'tanggal_jatuh_tempo'));
         return redirect()->route('admin.tagihan.index')->with('success', 'Tagihan berhasil ditambahkan.');
     }
 
     public function edit(Tagihan $tagihan)
     {
-        $akuns = Akun::orderBy('kode', 'asc')->get();
+        $akuns = Akun::aktif()->orderBy('kode')->get();
         return view('admin.keuangan.tagihan.edit', compact('tagihan', 'akuns'));
     }
 
     public function update(Request $request, Tagihan $tagihan)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'akun_id' => 'required|exists:akuns,id',
+            'nama'                => 'required|string|max:255',
+            'akun_id'             => 'required|exists:akuns,id',
             'tanggal_jatuh_tempo' => 'required|date',
         ]);
 
-        $tagihan->update($request->all());
-
+        $tagihan->update($request->only('nama', 'akun_id', 'tanggal_jatuh_tempo'));
         return redirect()->route('admin.tagihan.index')->with('success', 'Tagihan berhasil diperbarui.');
     }
 
