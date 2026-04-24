@@ -39,9 +39,9 @@
                 @forelse($presensis as $p)
                 <tr class="border-b border-gray-100 hover:bg-gray-50">
                     <td class="py-3 px-4 text-sm">{{ \Carbon\Carbon::parse($p->tanggal)->format('d M Y') }}</td>
-                    <td class="py-3 px-4 text-sm font-medium text-gray-800">{{ $p->student->name ?? '-' }}</td>
+                    <td class="py-3 px-4 text-sm font-medium text-gray-800">{{ $p->student->nama_lengkap ?? '-' }}</td>
                     <td class="py-3 px-4 text-sm">{{ $p->rombonganBelajar->nama ?? '-' }}</td>
-                    <td class="py-3 px-4 text-sm text-gray-500">{{ $p->mataPelajaran->nama ?? 'Harian (Umum)' }}</td>
+                    <td class="py-3 px-4 text-sm text-gray-500">{{ $p->mataPelajaran->nama_mata_pelajaran ?? 'Harian (Umum)' }}</td>
                     <td class="py-3 px-4">
                         @php
                             $color = match($p->status) {

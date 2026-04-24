@@ -29,7 +29,7 @@
                 <select name="mata_pelajaran_id" id="mapel_selector" class="w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                     <option value="">-- Presensi Harian Umum --</option>
                     @foreach($mataPelajarans as $mp)
-                        <option value="{{ $mp->id }}">{{ $mp->nama }}</option>
+                        <option value="{{ $mp->id }}">{{ $mp->nama_mata_pelajaran }}</option>
                     @endforeach
                 </select>
             </div>
